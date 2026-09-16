@@ -1,0 +1,26 @@
+#!//bin/bash
+
+echo 'rebuilding project' 
+
+j=0
+i=0
+
+make 
+
+for n in $(seq 1 20); do
+	((i++))
+
+	if [ $((n % 10)) == 0 ]; then
+		((j++))
+		i=0
+	fi
+
+	if [ -f Posted-TestCases/$j$i/PJ3 ]; then
+		rm Posted-TestCases/$j$i/PJ3
+		echo 'Removed previous build' 
+	fi
+
+	cp PJ3 Posted-TestCases/$j$i	
+	
+
+done 
